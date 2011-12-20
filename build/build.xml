@@ -771,8 +771,12 @@
             <maven-resource group="org.jboss.as" artifact="jboss-as-jpa-hibernate4"/>
         </module-def>
 
-        <module-def name="org.jboss.as.jpa.hibernate.infinispan">
-            <maven-resource group="org.jboss.as" artifact="jboss-as-jpa-hibernate-infinispan"/>
+        <module-def name="org.jboss.as.jpa.hibernate.infinispan" slot="3">
+            <maven-resource group="org.jboss.as" artifact="jboss-as-jpa-hibernate3-infinispan"/>
+        </module-def>
+
+        <module-def name="org.jboss.as.jpa.hibernate.infinispan" slot="4">
+            <maven-resource group="org.jboss.as" artifact="jboss-as-jpa-hibernate4-infinispan"/>
         </module-def>
 
         <module-def name="org.jboss.as.jpa.openjpa">

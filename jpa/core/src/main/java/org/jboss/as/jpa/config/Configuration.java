@@ -82,6 +82,8 @@ public class Configuration {
      */
     public static final String PROVIDER_CLASS_ECLIPSELINK = "org.eclipse.persistence.jpa.PersistenceProvider";
 
+    public static final String PROVIDER_CLASS_HIBERNATE_3_BUNDLED = "org.jboss.as.jpa.hibernate3.HibernatePersistenceProviderAdaptor";
+
     /**
      * default provider class
      */

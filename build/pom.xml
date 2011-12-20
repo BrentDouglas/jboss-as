@@ -1011,7 +1011,12 @@
 
                 <dependency>
                     <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-jpa-hibernate-infinispan</artifactId>
+                    <artifactId>jboss-as-jpa-hibernate3-infinispan</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-jpa-hibernate4-infinispan</artifactId>
                 </dependency>
 
                 <dependency>
