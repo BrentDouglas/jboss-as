@@ -187,7 +187,7 @@
                 the socketbinding referenced by the EJB remoting connector -->
                 <replicated-cache name="remote-connector-client-mappings" mode="SYNC" batching="true"/>
             </cache-container>
-            <cache-container name="hibernate" default-cache="local-query">
+            <cache-container name="hibernate" default-cache="local-query" jndi-name="java:jboss/infinispan/hibernate">
                 <transport lock-timeout="60000"/>
                 <invalidation-cache name="entity" mode="SYNC">
                     <transaction mode="NON_XA"/>

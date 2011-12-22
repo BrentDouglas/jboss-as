@@ -153,7 +153,7 @@
             <iiop enable-by-default="true" use-qualified-name="true"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:infinispan:1.1" default-cache-container="hibernate">
-            <cache-container name="hibernate" default-cache="local-query">
+            <cache-container name="hibernate" default-cache="local-query" jndi-name="java:jboss/infinispan/hibernate">
                 <local-cache name="entity">
                     <transaction mode="NON_XA"/>
                     <eviction strategy="LRU" max-entries="10000"/>

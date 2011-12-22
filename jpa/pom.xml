@@ -38,7 +38,7 @@
     <version>7.1.0.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>JBoss Application Server: JPA Subsystem</name>
+    <name>JBoss Application Server: JPA Core</name>
 
     <modules>
         <module>core</module>

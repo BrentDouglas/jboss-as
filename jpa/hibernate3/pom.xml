@@ -39,18 +39,20 @@
 
     <dependencies>
 
-        <!-- Hibernate 3.6.5.Final dependencies that override parent pom dependencies -->
+        <!-- Hibernate 3.6.x dependencies that override parent pom dependencies -->
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>3.6.6.Final</version>
+            <version>${version.org.hibernate3}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.6.6.Final</version>
+            <version>${version.org.hibernate3}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Internal -->

@@ -119,7 +119,6 @@ public class SecondLevelCacheTestCase {
 
     @Test
     public void testMultipleNonTXTransactionalEntityManagerInvocations() throws Exception {
-        Exception error = null;
         SFSB1 sfsb1 = lookup("SFSB1", SFSB1.class);
         sfsb1.createEmployee("Kelly Smith", "Watford, England", 10);
         sfsb1.createEmployee("Alex Scott", "London, England", 20);
