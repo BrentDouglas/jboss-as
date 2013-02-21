@@ -50,7 +50,7 @@ public class EmbeddedCacheManagerService implements Service<EmbeddedCacheManager
     }
 
     private final Value<EmbeddedCacheManagerConfiguration> config;
-    private volatile EmbeddedCacheManager container;
+    private volatile DefaultEmbeddedCacheManager container;
 
     public EmbeddedCacheManagerService(Value<EmbeddedCacheManagerConfiguration> config) {
         this.config = config;
@@ -75,6 +75,7 @@ public class EmbeddedCacheManagerService implements Service<EmbeddedCacheManager
         if ((this.container != null) && this.container.getStatus().allowInvocations()) {
             this.container.stop();
             this.container.removeListener(this);
+            this.container.cleanUp();
             log.debugf("%s cache container stopped", this.config.getValue().getName());
         }
     }
