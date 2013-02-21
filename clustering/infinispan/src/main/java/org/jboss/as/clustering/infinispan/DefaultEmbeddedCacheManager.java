@@ -22,10 +22,6 @@
 
 package org.jboss.as.clustering.infinispan;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import org.infinispan.AbstractDelegatingAdvancedCache;
 import org.infinispan.AdvancedCache;
 import org.infinispan.Cache;
@@ -33,8 +29,11 @@ import org.infinispan.configuration.cache.Configuration;
 import org.infinispan.configuration.global.GlobalConfiguration;
 import org.infinispan.manager.AbstractDelegatingEmbeddedCacheManager;
 import org.infinispan.manager.CacheContainer;
-import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * EmbeddedCacheManager decorator that overrides the default cache semantics of a cache manager.
@@ -44,17 +43,23 @@ public class DefaultEmbeddedCacheManager extends AbstractDelegatingEmbeddedCache
 
     private final String defaultCache;
 
-    public DefaultEmbeddedCacheManager(GlobalConfiguration global, String defaultCache) {
-        this(new DefaultCacheManager(global, null, false), defaultCache);
+    public DefaultEmbeddedCacheManager(final GlobalConfiguration global, final String defaultCache) {
+        this(new IntegrationCacheManager(global, null, false), defaultCache);
     }
 
-    public DefaultEmbeddedCacheManager(GlobalConfiguration global, Configuration config, String defaultCache) {
-        this(new DefaultCacheManager(global, config, false), defaultCache);
+    public DefaultEmbeddedCacheManager(final GlobalConfiguration global, final Configuration config, final String defaultCache) {
+        this(new IntegrationCacheManager(global, config, false), defaultCache);
     }
 
-    public DefaultEmbeddedCacheManager(EmbeddedCacheManager container, String defaultCache) {
+    public DefaultEmbeddedCacheManager(final EmbeddedCacheManager container, final String defaultCache) {
         super(container);
         this.defaultCache = defaultCache;
+    }
+
+    public void cleanUp() {
+        if (this.cm instanceof IntegrationCacheManager) {
+            ((IntegrationCacheManager)this.cm).cleanUp();
+        }
     }
 
     /**
