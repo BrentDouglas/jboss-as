@@ -22,18 +22,6 @@
 
 package org.jboss.as.jpa.processor;
 
-import static org.jboss.as.jpa.JpaLogger.ROOT_LOGGER;
-import static org.jboss.as.jpa.JpaMessages.MESSAGES;
-
-import java.io.IOException;
-import java.net.JarURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.jar.JarFile;
-
 import org.jboss.as.jpa.config.Configuration;
 import org.jboss.as.jpa.config.PersistenceUnitMetadataHolder;
 import org.jboss.as.jpa.config.PersistenceUnitsInApplication;
@@ -54,6 +42,18 @@ import org.jboss.modules.ModuleLoader;
 import org.jboss.modules.ResourceLoaderSpec;
 import org.jboss.modules.ResourceLoaders;
 
+import java.io.IOException;
+import java.net.JarURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.jar.JarFile;
+
+import static org.jboss.as.jpa.JpaLogger.ROOT_LOGGER;
+import static org.jboss.as.jpa.JpaMessages.MESSAGES;
+
 /**
  * Deployment processor which adds a module dependencies for modules needed for JPA deployments.
  *
@@ -73,6 +73,11 @@ public class JPADependencyProcessor implements DeploymentUnitProcessor {
     // module dependencies for hibernate3
     private static final ModuleIdentifier JBOSS_AS_NAMING_ID = ModuleIdentifier.create("org.jboss.as.naming");
     private static final ModuleIdentifier JBOSS_JANDEX_ID = ModuleIdentifier.create("org.jboss.jandex");
+
+    private static final ModuleIdentifier ORG_JBOSS_MSC_ID = ModuleIdentifier.create("org.jboss.msc");
+    private static final ModuleIdentifier ORG_JBOSS_AS_CLUSTERING_COMMON_ID = ModuleIdentifier.create("org.jboss.as.clustering.common");
+    private static final ModuleIdentifier ORG_JBOSS_AS_CLUSTERING_JGROUPS_ID = ModuleIdentifier.create("org.jboss.as.clustering.jgroups");
+    private static final ModuleIdentifier ORG_JBOSS_AS_CLUSTERING_INFINISPAN_ID = ModuleIdentifier.create("org.jboss.as.clustering.infinispan");
 
     /**
      * Add dependencies for modules required for JPA deployments
@@ -234,6 +239,11 @@ public class JPADependencyProcessor implements DeploymentUnitProcessor {
             // hack in the dependencies which are part of hibernate3integration
             // TODO:  do this automatically (adding dependencies found in HIBERNATE_3_PROVIDER).
             addDependency(moduleSpecification, moduleLoader, deploymentUnit, JBOSS_AS_NAMING_ID, JBOSS_JANDEX_ID);
+            // Infinispan 2lc deps
+            addDependency(moduleSpecification, moduleLoader, deploymentUnit,
+                    ORG_JBOSS_MSC_ID, ORG_JBOSS_AS_CLUSTERING_COMMON_ID,
+                    ORG_JBOSS_AS_CLUSTERING_JGROUPS_ID, ORG_JBOSS_AS_CLUSTERING_INFINISPAN_ID
+            );
         } catch (ModuleLoadException e) {
             throw MESSAGES.cannotLoadModule(e, HIBERNATE_3_PROVIDER, "hibernate 3");
         } catch (MalformedURLException e) {
